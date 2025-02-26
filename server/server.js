@@ -15,7 +15,7 @@ app.post("/signup", async (req, res) => {
     const {username, password, email} = req.body;
     //console.log(req.body); //uncomment to see what is being passed in 
     try{
-        const results = db.query(
+         await db.query(
             'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, password, email]
         );
         res.status(201).send({ message: 'Signup succesful'});
