@@ -10,3 +10,11 @@ Group Project - The Socket
 5. There are two ways now you can test the server.js file:
 For "get", on your local browser enter "http://localhost:3000/login" or whatever you are trying to test
 RECOMMENDED: download the software called "Postman". Enter the type of request (get,post,etc.) with the URL and click send.
+
+Make sure to add the following to your .env file in the server folder
+PORT=3001
+PGUSER=postgres
+PGHOST=localhost
+PGPASSWORD=(*whatever password you made*)
+PGDATABASE=socket
+PGPORT=5432
