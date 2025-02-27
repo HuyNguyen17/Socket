@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 // create an account 
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
     const {username, password, email} = req.body;
     //console.log(req.body); //uncomment to see what is being passed in
     try{
@@ -23,14 +23,14 @@ app.post("/signup", async (req, res) => {
         await db.query(
             'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashPassword, email]
         );
-        res.status(201).send({ message: 'Signup succesful'});
+        res.status(201).send({ message: 'Signup Succesful'});
     } catch (error) {
-        res.status(500).send({ error: "Signup failed"});
+        res.status(500).send({ error: "Signup Failed: Username taken or empty password/email field"});
     }
 });
 
 // login to account (incomplete)
-app.get("/login", async (req, res) => {
+app.get("/api/login", async (req, res) => {
     res.json({
         status: "sucess",
         user: "test user",
