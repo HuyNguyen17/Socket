@@ -3,6 +3,9 @@ require("dotenv").config();
 const bcrypt = require('bcrypt');
 const express = require("express");
 
+// initialize encryption 
+const saltRounds = 7;
+
 // talk to the database 
 const db = require("./db");
 
@@ -10,13 +13,15 @@ const db = require("./db");
 const app = express();
 app.use(express.json());
 
-// create an account (NEED TO ADD PASSWORD ENCRYPTION)
+// create an account 
 app.post("/signup", async (req, res) => {
     const {username, password, email} = req.body;
-    //console.log(req.body); //uncomment to see what is being passed in 
+    //console.log(req.body); //uncomment to see what is being passed in
     try{
-         await db.query(
-            'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, password, email]
+        const hashPassword = await bcrypt.hash(password, saltRounds);
+        //console.log(hashPassword); //uncomment to see hashed password 
+        await db.query(
+            'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashPassword, email]
         );
         res.status(201).send({ message: 'Signup succesful'});
     } catch (error) {
@@ -32,8 +37,8 @@ app.get("/login", async (req, res) => {
     })
 });
 
-// set port using .env; if no value is defined, set to 3001
-const PORT = process.env.PORT || 3001;
+// set port using .env; if no value is defined, set to 3000
+const PORT = process.env.PORT || 3000;
 
 // running 
 app.listen(PORT, () =>{

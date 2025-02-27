@@ -16,9 +16,11 @@ CREATE DATABASE socket
 
 CREATE TABLE users (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	username VARCHAR(50) NOT NULL UNIQUE,
-	password VARCHAR(50) NOT NULL,
+	username VARCHAR(60) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
 	email VARCHAR(255) UNIQUE
 );
 
 INSERT INTO users (username, password, email) values ('firstuser', 'firstpassword', 'firstuser@ufl.edu');
+ 
+-- to reset/delete a table run DROP TABLE table_name;

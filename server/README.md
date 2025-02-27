@@ -12,7 +12,7 @@ For "get", on your local browser enter "http://localhost:3000/login" or whatever
 RECOMMENDED: download the software called "Postman". Enter the type of request (get,post,etc.) with the URL and click send.
 
 Make sure to add the following to your .env file in the server folder
-PORT=3001
+PORT=3000
 PGUSER=postgres
 PGHOST=localhost
 PGPASSWORD=(*whatever password you made*)
