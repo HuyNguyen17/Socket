@@ -1,6 +1,5 @@
-# CEN3031
-Group Project (Name Pending)
-
+# The Socket
+CEN3031 group project
 # Instructions
 
 To install dependencies - `npm ci` in client and server folders
