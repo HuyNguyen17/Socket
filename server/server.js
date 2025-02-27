@@ -37,8 +37,8 @@ app.get("/login", async (req, res) => {
     })
 });
 
-// set port using .env; if no value is defined, set to 3000
-const PORT = process.env.PORT || 3000;
+// set port using .env; if no value is defined, set to 3001
+const PORT = process.env.PORT || 3001;
 
 // running 
 app.listen(PORT, () =>{
