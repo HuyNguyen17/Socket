@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import UserSignup from './components/UserSignup';
 import HomePage from "./routes/HomePage";
 import LoginPage from "./routes/LoginPage";
 import SignupPage from "./routes/SignupPage"
