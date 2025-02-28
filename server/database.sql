@@ -24,3 +24,11 @@ CREATE TABLE users (
 INSERT INTO users (username, password, email) values ('firstuser', 'firstpassword', 'firstuser@ufl.edu');
  
 -- to reset/delete a table run DROP TABLE table_name;
+
+
+--basic useful psql commands: 
+-- \dt  
+--shows all of the tables in the DB
+-- SELECT * FROM mytable;
+-- shows all of the data inside of the table
+
