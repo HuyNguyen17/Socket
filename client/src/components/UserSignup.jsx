@@ -6,7 +6,7 @@ const UserSignup = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
-    const Signup = async (e) => {
+    const HandleSignup = async (e) => {
         try {
             e.preventDefault(); //don't refresh
             const body =
@@ -31,7 +31,7 @@ const UserSignup = () => {
 
     return (
         <div>
-            <form onSubmit={Signup}>
+            <form onSubmit={HandleSignup}>
                 <label for="email">Email</label><br/>
                 <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)}></input><br/>
                 <label for="username">Username</label><br/>
