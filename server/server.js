@@ -13,6 +13,30 @@ const db = require("./db");
 const app = express();
 app.use(express.json());
 
+// Hardcoded test users and their get requests
+const testUsers = [
+    { username: "testuser", email: "testuser@example.com" },
+    { username: "john_doe", email: "john.doe@example.com" },
+];
+
+app.get("/api/users", (req, res) => {
+    res.json(testUsers.map(user => ({ username: user.username })));
+});
+
+app.get("/api/users/:username", (req, res) => {
+    const testUsers = [
+        { username: "testuser", email: "testuser@example.com" },
+        { username: "john_doe", email: "john.doe@example.com" }
+    ];
+    const user = testUsers.find(u => u.username === req.params.username);
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).json({ error: "User not found" });
+    }
+});
+
+
 // create an account 
 app.post("/api/signup", async (req, res) => {
     const {username, password, email} = req.body;

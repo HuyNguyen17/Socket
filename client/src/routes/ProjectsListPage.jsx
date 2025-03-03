@@ -3,7 +3,7 @@ import React from 'react'
 const ProjectsListPage = () => {
   return (
     <div>
-        Projects
+        This website will contain a dynamically updated project list.
     </div>
   )
 }
