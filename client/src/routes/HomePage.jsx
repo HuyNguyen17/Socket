@@ -14,6 +14,12 @@ const HomePage = () => {
       <button onClick={() => navigate('/login')} style={{marginTop: '20px', padding: '10px 20px', fontSize: '16px', backgroundColor: '#007BFF', color: 'white', border: 'none', borderRadius: '5px'}}>
         Login/Register
       </button>
+      <button onClick={() => navigate('/users')} style={{marginTop: '20px', padding: '10px 20px', fontSize: '16px', backgroundColor: '#007BFF', color: 'white', border: 'none', borderRadius: '5px'}}>
+        User list
+      </button>
+      <button onClick={() => navigate('/projects')} style={{marginTop: '20px', padding: '10px 20px', fontSize: '16px', backgroundColor: '#007BFF', color: 'white', border: 'none', borderRadius: '5px'}}>
+        Project list
+      </button>
     </div>
   );
 }

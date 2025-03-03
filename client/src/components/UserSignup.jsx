@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import api from "../api/api"
-const UserSignup = () => {
 
+const UserSignup = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
