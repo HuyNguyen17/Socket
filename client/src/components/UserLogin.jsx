@@ -1,27 +1,32 @@
 import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import api from "../api/api"
-const UserSignup = () => {
+
+//Login page!
+//TODO: Does not check for success! Check for it!
+const UserLogin = () => {
+
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
 
-    const HandleSignup = async (e) => {
+    const HandleLogin = async (e) => {
         try {
             e.preventDefault(); //don't refresh
             const body =
                 {
                     username,
                     password,
-                    email
                 }
-            api.post("/signup", body)
+            api.post("/login", body)
                 .then(function (response) {
                 console.log(response);
                 })
                 .catch(function (err) {
                 console.log(err);
                 });
+            //TODO: Login logic
         }
         catch(err) {
             console.error(err.message);
@@ -31,17 +36,16 @@ const UserSignup = () => {
 
     return (
         <div>
-            <form onSubmit={HandleSignup}>
-                <label for="email">Email</label><br/>
-                <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)}></input><br/>
+            <form onSubmit={HandleLogin}>
                 <label for="username">Username</label><br/>
                 <input type="text" id="username" name="username" value={username} onChange={e => setUsername(e.target.value)}></input><br/>
                 <label for="password">Password</label><br/>
                 <input type="password" id="password" name="password" value={password} onChange={e => setPassword(e.target.value)}></input><br/>
                 <button type="submit">Submit</button>
             </form>
+          <button onClick={() => navigate('/signup')}>Register</button>
         </div>
     );
 }
 
-export default UserSignup;
+export default UserLogin;
