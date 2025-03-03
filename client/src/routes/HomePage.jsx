@@ -9,7 +9,7 @@ const HomePage = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', textAlign: 'center'}}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
       <NavHeader />
       <div style={{marginTop: '200px', width: '80%', maxWidth: '800px', textAlign: 'left' }}>
         <h2 style={{fontSize: '24px', textAlign: 'center'}}>FAQ</h2>
