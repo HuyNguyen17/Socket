@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import NavHeader from '../components/NavHeader'
+
 import api from "../api/api";
 
 const UserProfile = () => {
@@ -22,6 +24,7 @@ const UserProfile = () => {
 
     return (
         <div>
+        <NavHeader />
         <h2>{user.username}'s Profile</h2>
         <p>Email: {user.email || "N/A"}</p>
         </div>
