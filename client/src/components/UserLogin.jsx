@@ -5,27 +5,19 @@ import api from "../api/api"
 //Login page!
 //TODO: Does not check for success! Check for it!
 const UserLogin = () => {
-
     const navigate = useNavigate();
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
     const HandleLogin = async (e) => {
         try {
             e.preventDefault(); //don't refresh
-            const body =
-                {
+            const body = {
                     username,
                     password,
-                }
+            }
             api.post("/login", body)
-                .then(function (response) {
-                console.log(response);
-                })
-                .catch(function (err) {
-                console.log(err);
-                });
+                .then(function (response) {console.log(response);})
+                .catch(function (err) {console.log(err);});
             //TODO: Login logic
         }
         catch(err) {
@@ -41,9 +33,8 @@ const UserLogin = () => {
                 <input type="text" id="username" name="username" value={username} onChange={e => setUsername(e.target.value)}></input><br/>
                 <label for="password">Password</label><br/>
                 <input type="password" id="password" name="password" value={password} onChange={e => setPassword(e.target.value)}></input><br/>
-                <button type="submit">Submit</button>
+                <button type="submit" style={{marginTop: '10px', marginBottom: '30px'}}>Login</button>
             </form>
-          <button onClick={() => navigate('/signup')}>Register</button>
         </div>
     );
 }
