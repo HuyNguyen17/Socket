@@ -1,9 +1,12 @@
 import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import api from "../api/api"
 
 //Login page!
 //TODO: Does not check for success! Check for it!
 const UserLogin = () => {
+
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -40,6 +43,7 @@ const UserLogin = () => {
                 <input type="password" id="password" name="password" value={password} onChange={e => setPassword(e.target.value)}></input><br/>
                 <button type="submit">Submit</button>
             </form>
+          <button onClick={() => navigate('/signup')}>Register</button>
         </div>
     );
 }
