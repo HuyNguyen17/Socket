@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import NavHeader from '../components/NavHeader'
 
 const HomePage = () => {
