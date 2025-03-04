@@ -50,7 +50,6 @@ router.post('/login', async (req, res) => {
         // use JWT token
         const token = jwt.sign({ id: user.id}, process.env.JWT_SECRET, { expiresIn: '2h' });
         res.send({ token });    
-        res.status(201).send({ message: 'Login Succesful'});
 
     } catch (error) {
         res.status(500).send({ error: "Login Failed"});
@@ -58,11 +57,8 @@ router.post('/login', async (req, res) => {
 });
 
 // edit account info (incomplete)
-router.post('/edit', async (req, res) => {
-    res.json({
-        status: "sucess",
-        user: "test user",
-    })
+router.put('/edit', authorization, async (req, res) => {
+
 });
 
 module.exports = router;
