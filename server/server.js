@@ -1,44 +1,20 @@
 // dependencies
-require("dotenv").config();
+require('dotenv').config();
 const bcrypt = require('bcrypt');
-const express = require("express");
+const express = require('express');
 
 // initialize encryption 
 const saltRounds = 7;
 
 // talk to the database 
-const db = require("./db");
+const db = require('./db');
 
 // create an express instance
 const app = express();
 app.use(express.json());
 
-// Hardcoded test users and their get requests
-const testUsers = [
-    { username: "testuser", email: "testuser@example.com" },
-    { username: "john_doe", email: "john.doe@example.com" },
-];
-
-app.get("/api/users", (req, res) => {
-    res.json(testUsers.map(user => ({ username: user.username })));
-});
-
-app.get("/api/users/:username", (req, res) => {
-    const testUsers = [
-        { username: "testuser", email: "testuser@example.com" },
-        { username: "john_doe", email: "john.doe@example.com" }
-    ];
-    const user = testUsers.find(u => u.username === req.params.username);
-    if (user) {
-        res.json(user);
-    } else {
-        res.status(404).json({ error: "User not found" });
-    }
-});
-
-
 // create an account 
-app.post("/api/signup", async (req, res) => {
+app.post('/api/signup', async (req, res) => {
     const {username, password, email} = req.body;
     //console.log(req.body); //uncomment to see what is being passed in
     try{
@@ -49,12 +25,66 @@ app.post("/api/signup", async (req, res) => {
         );
         res.status(201).send({ message: 'Signup Succesful'});
     } catch (error) {
-        res.status(500).send({ error: "Signup Failed: Username taken or empty password/email field"});
+        res.status(500).send({ error: "Signup Failed: Username/email taken or empty field"});
     }
 });
 
-// login to account (incomplete)
-app.get("/api/login", async (req, res) => {
+// login to account (some code from: Building a Robust User Authentication System with the PERN Stack by amit kumar) 
+app.post('/api/login', async (req, res) => {
+    const {username, password} = req.body;
+    //console.log(req.body); //uncomment to see what is being passed in 
+    try{
+        const results = await db.query(
+            'SELECT * FROM users WHERE username = $1',
+            [username]
+        );
+
+        // if username does not exist, throw error
+        if (results.rowCount === 0) {
+            return res.status(401).send( { error: 'Nonexistant User'});
+        }
+
+        const user = results.rows[0];
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        // if password does not match, throw error 
+        if (!isMatch) {
+            return res.status(401).send( { error: 'Incorrect Password'});
+        }
+
+        res.status(201).send({ message: 'Login Succesful'});
+
+    } catch (error) {
+        res.status(500).send({ error: "Login Failed"});
+    } 
+});
+
+// logout of account (incomplete)
+app.post('/api/logout', async (req, res) => {
+    res.json({
+        status: "sucess",
+        user: "test user",
+    })
+});
+
+// edit account info (incomplete)
+app.post('/api/edit', async (req, res) => {
+    res.json({
+        status: "sucess",
+        user: "test user",
+    })
+});
+
+// delete account (incomplete)
+app.post('/api/delete', async (req, res) => {
+    res.json({
+        status: "sucess",
+        user: "test user",
+    })
+});
+
+// generate list of users for user list (incomplete)
+app.get('/api/list', async (req, res) => {
     res.json({
         status: "sucess",
         user: "test user",
