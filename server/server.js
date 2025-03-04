@@ -1,95 +1,14 @@
 // dependencies
 require('dotenv').config();
-const bcrypt = require('bcrypt');
 const express = require('express');
-
-// initialize encryption 
-const saltRounds = 7;
-
-// talk to the database 
-const db = require('./db');
 
 // create an express instance
 const app = express();
 app.use(express.json());
 
-// create an account 
-app.post('/api/signup', async (req, res) => {
-    const {username, password, email} = req.body;
-    //console.log(req.body); //uncomment to see what is being passed in
-    try{
-        const hashPassword = await bcrypt.hash(password, saltRounds);
-        //console.log(hashPassword); //uncomment to see hashed password 
-        await db.query(
-            'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashPassword, email]
-        );
-        res.status(201).send({ message: 'Signup Succesful'});
-    } catch (error) {
-        res.status(500).send({ error: "Signup Failed: Username/email taken or empty field"});
-    }
-});
-
-// login to account (some code from: Building a Robust User Authentication System with the PERN Stack by amit kumar) 
-app.post('/api/login', async (req, res) => {
-    const {username, password} = req.body;
-    //console.log(req.body); //uncomment to see what is being passed in 
-    try{
-        const results = await db.query(
-            'SELECT * FROM users WHERE username = $1',
-            [username]
-        );
-
-        // if username does not exist, throw error
-        if (results.rowCount === 0) {
-            return res.status(401).send( { error: 'Nonexistant User'});
-        }
-
-        const user = results.rows[0];
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        // if password does not match, throw error 
-        if (!isMatch) {
-            return res.status(401).send( { error: 'Incorrect Password'});
-        }
-
-        res.status(201).send({ message: 'Login Succesful'});
-
-    } catch (error) {
-        res.status(500).send({ error: "Login Failed"});
-    } 
-});
-
-// logout of account (incomplete)
-app.post('/api/logout', async (req, res) => {
-    res.json({
-        status: "sucess",
-        user: "test user",
-    })
-});
-
-// edit account info (incomplete)
-app.post('/api/edit', async (req, res) => {
-    res.json({
-        status: "sucess",
-        user: "test user",
-    })
-});
-
-// delete account (incomplete)
-app.post('/api/delete', async (req, res) => {
-    res.json({
-        status: "sucess",
-        user: "test user",
-    })
-});
-
-// generate list of users for user list (incomplete)
-app.get('/api/list', async (req, res) => {
-    res.json({
-        status: "sucess",
-        user: "test user",
-    })
-});
+// use route files
+app.use("/api/users", require("./routes/users"));
+app.use("/api/projects", require("./routes/projects"));
 
 // set port using .env; if no value is defined, set to 3001
 const PORT = process.env.PORT || 3001;

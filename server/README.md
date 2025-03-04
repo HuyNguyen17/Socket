@@ -18,4 +18,4 @@ PGHOST=localhost
 PGPASSWORD=(*whatever password you made*)
 PGDATABASE=socket
 PGPORT=5432
-SECRET_KEY=mysecretkey
+JWT_SECRET=mysecretkey
