@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import api from "../api/api"
-
 
 //Login page!
 //TODO: Does not check for success! Check for it!
@@ -9,6 +8,9 @@ const UserLogin = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    
+    const [loginFailed, setFailure] = useState(false);
+
     const HandleLogin = async (e) => {
         try {
             e.preventDefault(); //don't refresh
@@ -24,18 +26,21 @@ const UserLogin = () => {
                     navigate("/");
                 })
                 .catch(function (err) {
-                    console.log("Error!");
+                    console.log("Login Error!");
                     console.log(err);
+                    setFailure(true);
                 });
         }
         catch(err) {
             console.error(err.message);
+            setFailure(true);
         }
 
     }
 
     return (
         <div>
+            {loginFailed ? <div style={{color: "red"}}>Login Failed!</div> : ""}
             <form onSubmit={HandleLogin}>
                 <label for="username">Username</label><br/>
                 <input type="text" id="username" name="username" value={username} onChange={e => setUsername(e.target.value)}></input><br/>
