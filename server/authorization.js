@@ -4,12 +4,11 @@ const jwt = require('jsonwebtoken');
 
 module.exports = async(req,res,next) => {
     try {
-        const jwtToken = req.header("token");
-
+        const jwtToken = req.header("Authorization");
         if(!jwtToken){
             return res.status(401).send( { error: 'Not Authorized'});
         }
-        const payload = jwt.verify(jwtToken, process.env.JWT_SECRET);
+        const payload = jwt.verify(jwtToken, 'JWT_SECRET');
 
         req.user = payload.user;
         next();
