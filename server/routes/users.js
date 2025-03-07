@@ -30,7 +30,7 @@ router.post('/signup', async (req, res) => {
 // login to account (some code from: Building a Robust User Authentication System with the PERN Stack by amit kumar) 
 router.post('/login', async (req, res) => {
     const {username, password} = req.body;
-    //console.log(req.body); //uncomment to see what is being passed in 
+    console.log(req.body); //uncomment to see what is being passed in 
     try{
         const results = await db.query(
             'SELECT * FROM users WHERE username = $1',
@@ -62,6 +62,27 @@ router.post('/login', async (req, res) => {
 // edit account info (incomplete)
 router.put('/edit', authorization, async (req, res) => {
 
+});
+
+//read user data
+router.get('/users/:username', async (req, res) => {
+    const {username} = req.params;
+    try {
+        const result = await db.query(
+            `SELECT id, username, email, linkedin, major, year, description, profile_pic
+             FROM users
+             WHERE username = $1`,
+            [username]
+        );
+        if (result.rowCount === 0){
+            return res.status(404).send({ error: 'User not found' });
+        }
+        const user = result.rows[0];
+        res.status(200).send(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Error fetching user profile' });
+    }
 });
 
 module.exports = router;
