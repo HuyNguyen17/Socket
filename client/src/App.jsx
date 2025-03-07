@@ -4,10 +4,10 @@ import HomePage from "./routes/HomePage";
 import LoginPage from "./routes/LoginPage";
 import SignupPage from "./routes/SignupPage"
 import UsersListPage from "./routes/UsersListPage";
-import UserProfile from "./routes/UserProfile";
 import ProjectsListPage from "./routes/ProjectsListPage";
 import SignupSuccessPage from "./routes/SignupSuccess";
 import SignupFailurePage from "./routes/SignupFailure";
+import UserProfilePage from "./routes/UserProfilePage";
 
 const App = () => {
   return (
@@ -17,10 +17,10 @@ const App = () => {
         <Route path="/signup" element={<SignupPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/users" element={<UsersListPage/>}/>
-        <Route path="/profile/:username" element={<UserProfile/>}/>
         <Route path="/projects" element={<ProjectsListPage/>}/>
         <Route path="/signup-success" element={<SignupSuccessPage/>}/>
         <Route path="/signup-failure" element={<SignupFailurePage/>}/>
+        <Route path="/users/:username" element={<UserProfilePage />} />
       </Routes>
     </Router>
   );

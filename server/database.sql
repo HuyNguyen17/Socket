@@ -12,7 +12,7 @@
 -- PGPORT=5432
 -- step 5: run the following commands in psql
 
-CREATE DATABASE socket
+CREATE DATABASE socket;
 
 CREATE TABLE users (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
