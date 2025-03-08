@@ -8,6 +8,7 @@ import ProjectsListPage from "./routes/ProjectsListPage";
 import SignupSuccessPage from "./routes/SignupSuccess";
 import SignupFailurePage from "./routes/SignupFailure";
 import UserProfilePage from "./routes/UserProfilePage";
+import DashboardPage from "./routes/DashboardPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/projects" element={<ProjectsListPage/>}/>
         <Route path="/signup-success" element={<SignupSuccessPage/>}/>
         <Route path="/signup-failure" element={<SignupFailurePage/>}/>
+        <Route path="/home" element={<DashboardPage/>}/>
         <Route path="/users/:username" element={<UserProfilePage />} />
       </Routes>
     </Router>
