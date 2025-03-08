@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserHeader from '../components/UserHeader'
+// help from  https://www.npmjs.com/package/jwt-decode
+import { jwtDecode } from "jwt-decode";
 
 const DashboardPage = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [username, setUsername] = useState(null);
+  
+  // gotta use useEffect or else it will continutally re render infinite times. 
+  useEffect(() => {
+    console.log(jwtDecode(localStorage.getItem('authToken')));
+  if (localStorage.getItem('authToken')) {
+    const tempToken = jwtDecode(localStorage.getItem('authToken'));
+    console.log(tempToken.username);
+    setUsername(tempToken.username); 
+  }
+  }, []);
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -11,7 +24,7 @@ const DashboardPage = () => {
   return (
     <div>
       <UserHeader />
-      <h2 style={{marginTop: '50px', fontSize: '24px', textAlign: 'center'}}>Welcome Back!</h2>
+      <h2 style={{marginTop: '50px', fontSize: '24px', textAlign: 'center'}}>Welcome Back {username}!</h2>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
         <div style={{marginTop: '100px', width: '80%', maxWidth: '800px', textAlign: 'left' }}>
           <h2 style={{fontSize: '24px', textAlign: 'center'}}>FAQ</h2>

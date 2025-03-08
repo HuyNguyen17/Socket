@@ -14,15 +14,15 @@ const UserHeader = () => {
                 </h1>
                 <ButtonGroup as="nav">
                     <NavHeaderButton 
-                        target ='/login'
+                        target ='/home'
                         label = "Projects Page"
                     />
                     <NavHeaderButton 
-                        target ='/login'
+                        target ='/home'
                         label = "My Profile"
                     />
                     <NavHeaderButton 
-                        target ='/login'
+                        target ='/home'
                         label = "Logout"
                     />
                 </ButtonGroup>
