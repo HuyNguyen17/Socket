@@ -27,7 +27,7 @@ const UserHeader = () => {
                 </h1>
                 <ButtonGroup as="nav">
                     <NavHeaderButton 
-                        target ='/home'
+                        target ='/projects'
                         label = "Projects Page"
                     />
                     <NavHeaderButton 
