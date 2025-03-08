@@ -2,9 +2,22 @@ import React from "react";
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavHeaderButton from "./NavHeaderButton";
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 const UserHeader = () => {
     const navigate = useNavigate();
+    const [username, setUsername] = useState(null);
+      
+      // gotta use useEffect or else it will continutally re render infinite times. 
+      useEffect(() => {
+        console.log(jwtDecode(localStorage.getItem('authToken')));
+      if (localStorage.getItem('authToken')) {
+        const tempToken = jwtDecode(localStorage.getItem('authToken'));
+        console.log(tempToken.username);
+        setUsername(tempToken.username); 
+      }
+      }, []);
 
     return(
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
@@ -18,11 +31,11 @@ const UserHeader = () => {
                         label = "Projects Page"
                     />
                     <NavHeaderButton 
-                        target ='/home'
+                        target={`/users/${username}`}
                         label = "My Profile"
                     />
                     <NavHeaderButton 
-                        target ='/home'
+                        target ='/logout'
                         label = "Logout"
                     />
                 </ButtonGroup>
