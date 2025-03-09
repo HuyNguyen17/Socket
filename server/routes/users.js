@@ -78,6 +78,15 @@ router.get('/getuser/:username', authorization, async (req, res) => {
     }
 });
 
+// decode JWT to get username
+router.get('/decode', authorization, async (req, res) => {
+    try {
+        res.send(req.user);
+    } catch (error) {
+        res.status(500).send( { error: 'Error fetching username' });
+    } 
+});
+
 // edit account info (incomplete)
 router.put('/edit', authorization, async (req, res) => {
 

@@ -3,21 +3,34 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NavHeaderButton from "./NavHeaderButton";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { jwtDecode } from "jwt-decode";
+import api from "../api/api";
 
 const UserHeader = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState(null);
       
       // gotta use useEffect or else it will continutally re render infinite times. 
-      useEffect(() => {
-        console.log(jwtDecode(localStorage.getItem('authToken')));
-      if (localStorage.getItem('authToken')) {
-        const tempToken = jwtDecode(localStorage.getItem('authToken'));
-        console.log(tempToken.username);
-        setUsername(tempToken.username); 
-      }
-      }, []);
+    useEffect(() => {
+              const fetchUsername = async () => {
+                  try {
+                      const token = localStorage.getItem('authToken');
+                      if (!token) {
+                          console.error("Error no token");
+                          return;
+                      }
+                      const response = await api.get(`/users/decode`, {
+                          headers: {
+                              Authorization: `${token}`, // Send the token in the header
+                          },
+                      });
+                      setUsername(response.data);
+                  } catch (error) {
+                      console.error("Error getting username:", error);
+                  }
+              };
+      
+              fetchUsername();
+          }, []);
 
     return(
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>

@@ -9,8 +9,7 @@ module.exports = async(req,res,next) => {
             return res.status(401).send( { error: 'Not Authorized'});
         }
         const payload = jwt.verify(jwtToken, 'JWT_SECRET');
-
-        req.user = payload.user;
+        req.user = payload.username;
         next();
     } catch (error) {
         return res.status(401).send( { error: 'Not Authorized'});
