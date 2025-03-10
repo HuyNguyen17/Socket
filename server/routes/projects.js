@@ -47,15 +47,54 @@ router.post('/create_project', async (req, res) => {
             await db.query(
                 'INSERT INTO link_projects (user_id,project_id) VALUES($1,$2)' , [user.id ,project.id] 
             );
+
             if(description.length > 5000){
                 return res.status(401).send( { error: 'Description too Long'});
+            }else{
+                await db.query(
+                    'UPDATE projects SET description = $1 WHERE id = $2', [project_description, project.id]
+                );
             }
-            await db.query(
-                'UPDATE projects SET description = $1 WHERE id = $2', [project_description, project.id]
-            );
 
         }catch(error){
             res.status(500).send({ error: "Project or Username doesnt exist."});
         }
     });
+
+    router.post('/edit_project', async (req, res) => {
+        const{project_name, usernames,description, project_pic} = req.body;
+        try {
+            //get the current data of the project.
+            const result = await db.query(
+                'SELECT * FROM projects WHERE projectname = $1',
+                [project_name]
+            );
+             // if project does not exist, throw error
+            if (result.rowCount === 0) {
+                return res.status(401).send( { error: 'Nonexistant project'});
+            }
+            
+            //update profile picture
+            if(profile_pic === result.profile_pic){
+                    //do nothing if the profile_pic is the same as what is already in the db
+            } else{
+                await db.query(
+                    'UPDATE projects SET profile_pic = $1 WHERE id = $2',[profile_pic,result.id]
+                );
+            }
+            //update description
+            if(description === result.description){
+                //do nothing if the description is the same as what is already in the db
+            } else{
+                await db.query(
+                    'UPDATE projects SET description = $1 WHERE id = $2',[description,result.id]
+                );
+            }
+        } catch (error) {
+             res.status(500).send({ error: "Editing project failed."});
+        }
+
+    });
+
+
 module.exports = router;
