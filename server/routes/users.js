@@ -89,7 +89,50 @@ router.get('/decode', authorization, async (req, res) => {
 
 // edit account info (incomplete)
 router.put('/edit', authorization, async (req, res) => {
+    const{username, linkedin, major, year, description} = req.params;
+    try{
+        const result = await db.query(
+            `SELECT * FROM users WHERE username = $1`,
+            [username]
+        );
+        const user_id = result.id;
 
+        //update the linkedin of the user
+        if(linkedin === result.linkedin){
+            //do nothing if the linked in is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET linkedin = $1 WHERE id = $2',[linkedin,user_id]
+            );
+        }
+        //update major
+        if(major === result.major){
+            //do nothing if the major is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET major = $1 WHERE id = $2',[major,user_id]
+            );
+        }
+         //update year
+         if(year === result.year){
+            //do nothing if the year is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET year = $1 WHERE id = $2',[year,user_id]
+            );
+        }
+         //update description
+         if(description === result.description){
+            //do nothing if the description is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET description = $1 WHERE id = $2',[description,user_id]
+            );
+        }
+
+    } catch(error){
+        res.status(500).send({ error: "Editing user profile failed."});
+    }
 });
 
 module.exports = router;
