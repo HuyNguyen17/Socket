@@ -12,7 +12,7 @@
 -- PGPORT=5432
 -- step 5: run the following commands in psql
 
-CREATE DATABASE socket
+CREATE DATABASE socket;
 
 CREATE TABLE users (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -63,6 +63,9 @@ CREATE TABLE link_organizations (
 
 INSERT INTO users (username, password, email, linkedin, major, year, description) values ('firstuser', 'firstpassword', 'firstuser@ufl.edu', 'mylinkedin.com', 'Computer Engineering', '4th', 'Freshman ece student at UF!');
  
+
+
+
 -- to connect to the database run \c socket
 -- to reset/delete a table run DROP TABLE table_name;
 
