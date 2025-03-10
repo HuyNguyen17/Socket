@@ -89,11 +89,11 @@ router.get('/decode', authorization, async (req, res) => {
 
 // edit account info (incomplete)
 router.put('/edit', authorization, async (req, res) => {
-    const{username, linkedin, major, year, description} = req.params;
+    const{linkedin, major, year, description,profile_pic} = req.params;
     try{
         const result = await db.query(
             `SELECT * FROM users WHERE username = $1`,
-            [username]
+            [req.user]
         );
         const user_id = result.id;
 
@@ -127,6 +127,14 @@ router.put('/edit', authorization, async (req, res) => {
         } else{
             await db.query(
                 'UPDATE users SET description = $1 WHERE id = $2',[description,user_id]
+            );
+        }
+          //update profile picture
+          if(profile_pic === result.profile_pic){
+            //do nothing if the profile_pic is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET profile_pic = $1 WHERE id = $2',[profile_pic,user_id]
             );
         }
 
