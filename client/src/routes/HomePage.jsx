@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import NavHeader from '../components/NavHeader'
-import UserHeader from '../components/UserHeader';
 import api from '../api/api';
 
 const HomePage = () => {
@@ -43,7 +42,7 @@ const HomePage = () => {
 
   return (
     <div>
-      {loggedIn ? <UserHeader/> : <NavHeader />}
+      <NavHeader/>
       {loggedIn ? <h2 style={{marginTop: '50px', fontSize: '24px', textAlign: 'center'}}>Welcome Back {username}!</h2> : ""}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
         <div style={{marginTop: '200px', width: '80%', maxWidth: '800px', textAlign: 'left' }}>

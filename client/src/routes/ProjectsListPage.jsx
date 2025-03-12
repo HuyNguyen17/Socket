@@ -1,10 +1,10 @@
 import React from 'react'
-import UserHeader from '../components/UserHeader'
+import NavHeader from '../components/NavHeader'
 
 const ProjectsListPage = () => {
   return (
     <div>
-        <UserHeader />
+        <NavHeader />
         This website will contain a dynamically updated project list.
     </div>
   )
