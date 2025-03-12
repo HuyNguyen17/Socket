@@ -18,11 +18,7 @@ const UserHeader = () => {
                           console.error("Error no token");
                           return;
                       }
-                      const response = await api.get(`/users/decode`, {
-                          headers: {
-                              Authorization: `${token}`, // Send the token in the header
-                          },
-                      });
+                      const response = await api.get(`/users/decode`);
                       setUsername(response.data);
                   } catch (error) {
                       console.error("Error getting username:", error);
