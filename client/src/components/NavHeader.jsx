@@ -11,6 +11,8 @@ const NavHeader = () => {
     const [loggedIn, setLoginStatus] = useState(false);
     const navigate = useNavigate();
     
+    // gotta use useEffect or else it will continutally re render infinite times. 
+    
     useEffect(() => {
       const fetchUsername = async () => {
           try {
