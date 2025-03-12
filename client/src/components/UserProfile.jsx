@@ -15,11 +15,7 @@ const UserProfile = () => {
                     setError(true);
                     return;
                 }
-                const response = await api.get(`/users/getuser/${username}`, {
-                    headers: {
-                        Authorization: `${token}`, // Send the token in the header
-                    },
-                });
+                const response = await api.get(`/users/getuser/${username}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error("Error fetching user profile:", error);
