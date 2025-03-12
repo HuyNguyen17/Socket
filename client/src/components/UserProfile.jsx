@@ -30,9 +30,9 @@ const UserProfile = () => {
         fetchUserProfile();
     }, [username]);
 
-    // Display 404 if no such user exists
+    // Display 401 if no such user exists
     if (error) {
-        return <div>404 - Unauthorized</div>;
+        return <div>401 - Unauthorized</div>;
     }
 
     if (!userData) {
