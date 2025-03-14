@@ -49,7 +49,7 @@ router.post('/create_project', async (req, res) => {
             );
 
             if(description.length > 5000){
-                return res.status(401).send( { error: 'Description too Long'});
+                return res.status(500).send( { error: 'Description too Long'});
             }else{
                 await db.query(
                     'UPDATE projects SET description = $1 WHERE id = $2', [project_description, project.id]
