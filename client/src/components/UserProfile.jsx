@@ -15,11 +15,7 @@ const UserProfile = () => {
                     setError(true);
                     return;
                 }
-                const response = await api.get(`/users/getuser/${username}`, {
-                    headers: {
-                        Authorization: `${token}`, // Send the token in the header
-                    },
-                });
+                const response = await api.get(`/users/getuser/${username}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error("Error fetching user profile:", error);
@@ -30,9 +26,9 @@ const UserProfile = () => {
         fetchUserProfile();
     }, [username]);
 
-    // Display 404 if no such user exists
+    // Display 401 if no such user exists
     if (error) {
-        return <div>404 - Unauthorized</div>;
+        return <div>401 - Unauthorized</div>;
     }
 
     if (!userData) {

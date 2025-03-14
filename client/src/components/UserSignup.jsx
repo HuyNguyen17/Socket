@@ -22,16 +22,16 @@ const UserSignup = () => {
                 console.log(response);
                 console.log("Navigating to signup success");
                 // if succesful, show signup success screen
-                navigate("/signup-success");
+                navigate("/signup-result", {state:{success:true}});
                 })
                 .catch(function (err) {
                 console.log(err);
-                navigate("/signup-failure");
+                navigate("/signup-result", {state:{success:false}});
                 });
         }
         catch(err) {
             console.error(err.message);
-            navigate("/signup-failure");
+            navigate("/signup-result", {state:{success:false}});
         }
 
     }

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import UserHeader from '../components/UserHeader'
 import UserProfile from '../components/UserProfile'
-import api from "../api/api";
+import NavHeader from "../components/NavHeader";
 
 const UserProfilePage = () => {
     return (
         <div>
-            <UserHeader />
+            <NavHeader />
             <UserProfile />
         </div>
       )

@@ -1,8 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavHeader from '../components/NavHeader'
+import api from '../api/api';
 
 const HomePage = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [loggedIn, setLoginStatus] = useState(false);
+  
+  useEffect(() => {
+    const fetchUsername = async () => {
+        try {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                setLoginStatus(false);
+                console.error("Error no token");
+                return;
+            }
+            else {
+              //only send a response if we have a token
+              setLoginStatus(true);
+              const response = await api.get(`/users/decode`, {
+                headers: {
+                    Authorization: `${token}`, // Send the token in the header
+                },
+            });
+              setUsername(response.data);
+            }
+            
+        } catch (error) {
+            console.error("Error getting username:", error);
+        }
+    };
+
+    fetchUsername();
+}, []);
+
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -10,7 +42,8 @@ const HomePage = () => {
 
   return (
     <div>
-      <NavHeader />
+      <NavHeader/>
+      {loggedIn ? <h2 style={{marginTop: '50px', fontSize: '24px', textAlign: 'center'}}>Welcome Back {username}!</h2> : ""}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
         <div style={{marginTop: '200px', width: '80%', maxWidth: '800px', textAlign: 'left' }}>
           <h2 style={{fontSize: '24px', textAlign: 'center'}}>FAQ</h2>
