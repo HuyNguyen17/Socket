@@ -18,6 +18,7 @@ CREATE DATABASE socket;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR(60) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -52,6 +53,10 @@ CREATE TABLE users (
 	year VARCHAR(20),
 	description VARCHAR(5000),
 	profile_pic bytea
+=======
+CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE,
+	linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea
+>>>>>>> 849414f (Front-end only changes to make the websites look nicer.)
 );
 =======
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
