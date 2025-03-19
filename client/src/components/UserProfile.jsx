@@ -36,13 +36,16 @@ const UserProfile = () => {
     }
 
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>{userData.username}'s Profile</h1>
-            <p><strong>Email:</strong> {userData.email}</p>
-            <p><strong>LinkedIn:</strong> <a href={userData.linkedin} target="_blank" rel="noopener noreferrer">{userData.linkedin}</a></p>
-            <p><strong>Major:</strong> {userData.major}</p>
-            <p><strong>Year:</strong> {userData.year}</p>
-            <p><strong>Description:</strong> {userData.description}</p>
+        <div style={{padding: "20px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" 
+        }}>
+            <h1 style={{fontSize: "24px", fontWeight: "bold"}}>
+                {userData.username}'s Profile
+            </h1>
+            <p style={{fontSize: "18px"}}>Email: {userData.email}</p>
+            <p style={{fontSize: "18px"}}>LinkedIn: <a href={userData.linkedin} target="_blank" rel="noopener noreferrer"> {userData.linkedin}</a></p>
+            <p style={{fontSize: "18px"}}>Major: {userData.major}</p>
+            <p style={{fontSize: "18px"}}>Year: {userData.year}</p>
+            <p style={{fontSize: "18px"}}>Description: {userData.description}</p>
         </div>
     );
 };
