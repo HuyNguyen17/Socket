@@ -8,12 +8,14 @@ const SignupResultPage = () => {
   const FAILURE_MESSAGE = "Signup failed. User/email taken or blank field entered. ";
   return (
     <div>
-        <NavHeader />
-        <p>
-            {state.success ? SUCCESS_MESSAGE : FAILURE_MESSAGE}
+      <NavHeader/>
+      <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>
+        <p style={{fontSize: '24px', marginTop: '20px'}}>
+          {state?.success ? SUCCESS_MESSAGE : FAILURE_MESSAGE}
         </p>
+      </div>
     </div>
-  )
+  );
 }
 
 export default SignupResultPage;

@@ -14,16 +14,8 @@
 
 CREATE DATABASE socket;
 
-CREATE TABLE users (
-	id BIGSERIAL NOT NULL PRIMARY KEY,
-	username VARCHAR(60) NOT NULL UNIQUE,
-	password VARCHAR(255) NOT NULL,
-	email VARCHAR(255) UNIQUE,
-	linkedin VARCHAR(255),
-	major VARCHAR(255),
-	year VARCHAR(20),
-	description VARCHAR(5000),
-	profile_pic bytea
+CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE,
+	linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea
 );
 
 CREATE TABLE projects (
