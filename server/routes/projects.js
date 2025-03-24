@@ -4,10 +4,13 @@ const db = require('../db/index.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authorization = require("../authorization");
+const user = require("./users.js");
+
+
 
 
 router.post('/create_project', async (req, res) => {
-    const{project_name, username,project_description} = req.body;
+    const{project_name ,project_description, auth_token} = req.body;
         if(!project_name){
             return res.status(400).send({ error: "Project needs to have a name."});
 
@@ -22,7 +25,13 @@ router.post('/create_project', async (req, res) => {
             res.status(500).send({ error: "Project Name Taken or null or too long"});
         }
         //get the ID of the project and link it to the user.
+
         try{
+            const username = "";
+            app.runMiddleware('/decode',{method:'post'},function(res,body,req){
+                username = res;
+            });
+            
             const results = await db.query(
                         'SELECT * FROM users WHERE username = $1',
                         [username]
@@ -55,7 +64,7 @@ router.post('/create_project', async (req, res) => {
                     'UPDATE projects SET description = $1 WHERE id = $2', [project_description, project.id]
                 );
             }
-
+            return res.status(200).send("Project Created");
         }catch(error){
             res.status(500).send({ error: "Project or Username doesnt exist."});
         }
@@ -90,11 +99,30 @@ router.post('/create_project', async (req, res) => {
                     'UPDATE projects SET description = $1 WHERE id = $2',[description,result.id]
                 );
             }
+            return res.status(200).send("Project updated");
         } catch (error) {
              res.status(500).send({ error: "Editing project failed."});
         }
 
     });
+    router.post('/get_project', async (req, res) => {
+        const{project_name} = req.body;
+        try {
+                const result = await db.query(
+                    `SELECT * FROM projects WHERE projectname = $1`,
+                    [project_name]
+                );
+        
+                if (result.rowCount === 0){
+                    return res.status(404).send( { error: 'Nonexistant Project' });
+                }
+                const project = result.rows[0];
+                return res.status(200).send(project);
+            } catch (error) {
+                res.status(500).send( { error: 'Error fetching Project' });
+            }
+    });
+
 
 
 module.exports = router;
