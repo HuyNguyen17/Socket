@@ -1,13 +1,26 @@
 import React from 'react'
 import NavHeader from '../components/NavHeader'
+import { Link } from 'react-router-dom';
 
 const ProjectsListPage = () => {
   return (
     <div>
-        <NavHeader />
-        This website will contain a dynamically updated project list.
+      <NavHeader />
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <Link to="/create-project">
+          <button style={{padding: '15px 30px', fontSize: '28px', cursor: 'pointer', backgroundColor: 'white', border: 'black 1px solid', borderRadius: '5px'}}>
+            Submit your project
+          </button>
+        </Link>
+        <div style={{ marginTop: '30px', fontSize: '36px'}}>
+          Projects:
+        </div>
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        Here we will have a list of user projects fetched from the database.
+      </div>
     </div>
-  )
+  );
 }
 
-export default ProjectsListPage
+export default ProjectsListPage;
