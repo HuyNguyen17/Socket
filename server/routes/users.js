@@ -89,7 +89,58 @@ router.get('/decode', authorization, async (req, res) => {
 
 // edit account info (incomplete)
 router.put('/edit', authorization, async (req, res) => {
+    const{linkedin, major, year, description,profile_pic} = req.params;
+    try{
+        const result = await db.query(
+            `SELECT * FROM users WHERE username = $1`,
+            [req.user]
+        );
+        const user_id = result.id;
 
+        //update the linkedin of the user
+        if(linkedin === result.linkedin){
+            //do nothing if the linked in is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET linkedin = $1 WHERE id = $2',[linkedin,user_id]
+            );
+        }
+        //update major
+        if(major === result.major){
+            //do nothing if the major is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET major = $1 WHERE id = $2',[major,user_id]
+            );
+        }
+         //update year
+         if(year === result.year){
+            //do nothing if the year is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET year = $1 WHERE id = $2',[year,user_id]
+            );
+        }
+         //update description
+         if(description === result.description){
+            //do nothing if the description is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET description = $1 WHERE id = $2',[description,user_id]
+            );
+        }
+          //update profile picture
+          if(profile_pic === result.profile_pic){
+            //do nothing if the profile_pic is the same as what is already in the db
+        } else{
+            await db.query(
+                'UPDATE users SET profile_pic = $1 WHERE id = $2',[profile_pic,user_id]
+            );
+        }
+
+    } catch(error){
+        res.status(500).send({ error: "Editing user profile failed."});
+    }
 });
 
 module.exports = router;
