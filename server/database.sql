@@ -21,6 +21,7 @@ CREATE DATABASE socket;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR(60) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -40,6 +41,8 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT 
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE, linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea);
 >>>>>>> 8642c5f (Added an option to create a project and save it to backend.)
 =======
+=======
+>>>>>>> 6143ce1 (added posts.js)
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE, linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea);
 =======
 =======
@@ -68,6 +71,8 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT 
 >>>>>>> 7ff91e0 (working on orgs)
 );
 =======
+=======
+>>>>>>> b81b52c (added posts.js)
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR(60) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -78,10 +83,12 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
     description VARCHAR(5000),
     profile_pic bytea
     );
+<<<<<<< HEAD
 >>>>>>> Stashed changes
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 3c0f21c (working on orgs)
+<<<<<<< HEAD
 >>>>>>> 86fcde0 (working on orgs)
 =======
 >>>>>>> 9698984 (added posts.js)
@@ -91,6 +98,10 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT 
 =======
 >>>>>>> 3c0f21c (working on orgs)
 >>>>>>> 7ff91e0 (working on orgs)
+=======
+=======
+>>>>>>> b81b52c (added posts.js)
+>>>>>>> 6143ce1 (added posts.js)
 
 CREATE TABLE projects (id BIGSERIAL NOT NULL PRIMARY KEY, projectname VARCHAR(60) NOT NULL UNIQUE, description VARCHAR(5000), project_pic bytea);
 
