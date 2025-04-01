@@ -40,5 +40,27 @@ router.post('/create_organization', async (req, res) => {
 
 });
 
+router.post('/adduser_to_org', async (req, res) => {
+    const{organization_name, auth_token, username} = req.body;
+    try {
+        const org = await db.query(
+            'SELECT * FROM organizations WHERE organization_name = $1',
+            [organization_name]
+        )
+
+        const user = [];
+        app.runMiddleware('/getuser/:username',{method:'post'},function(res,body,req){
+            user = res;
+        });
+
+        await db.query(
+            'INSERT INTO link_organizations (org_id, user_id) VALUES($1,$2)',[org.org_id,user.id]
+        );
+
+    } catch (error) {
+        res.status(500).send({ error: "Organization Name Taken"});
+    }
+    });
+
 
 module.exports = router;

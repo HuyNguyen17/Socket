@@ -14,6 +14,7 @@
 
 CREATE DATABASE socket;
 
+<<<<<<< Updated upstream
 CREATE TABLE users (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	username VARCHAR(60) NOT NULL UNIQUE,
@@ -25,6 +26,18 @@ CREATE TABLE users (
 	description VARCHAR(5000),
 	profile_pic bytea
 );
+=======
+CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
+    username VARCHAR(60) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    linkedin VARCHAR(255),
+    major VARCHAR(255),
+    year VARCHAR(20),
+    description VARCHAR(5000),
+    profile_pic bytea
+    );
+>>>>>>> Stashed changes
 
 CREATE TABLE projects (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -71,3 +84,6 @@ INSERT INTO users (username, password, email, linkedin, major, year, description
 -- shows all of the tables in the DB
 -- SELECT * FROM mytable;
 -- shows all of the data inside of the table
+
+
+--UPDATE users SET year = 2026 WHERE id = testuser
