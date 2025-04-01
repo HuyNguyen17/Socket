@@ -24,6 +24,7 @@ CREATE DATABASE socket;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR(60) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -49,6 +50,8 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT 
 >>>>>>> 8685617 (Front-end only changes to make the websites look nicer.)
 =======
 >>>>>>> 736f096 (Added an option to create a project and save it to backend.)
+=======
+>>>>>>> 971ec25 (working on orgs)
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE, linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea);
 =======
 =======
@@ -83,6 +86,8 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT 
 >>>>>>> 2a0792e (Front-end only changes to make the websites look nicer.)
 =======
 >>>>>>> 386ac73 (Added an option to create a project and save it to backend.)
+=======
+>>>>>>> a1c2f0c (working on orgs)
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR(60) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -130,8 +135,43 @@ CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT 
 =======
 CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE, linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea);
 >>>>>>> 8642c5f (Added an option to create a project and save it to backend.)
+<<<<<<< HEAD
 >>>>>>> 386ac73 (Added an option to create a project and save it to backend.)
+<<<<<<< HEAD
 >>>>>>> 736f096 (Added an option to create a project and save it to backend.)
+=======
+=======
+=======
+CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY, username VARCHAR(60) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, email VARCHAR(255) UNIQUE, linkedin VARCHAR(255), major VARCHAR(255), year VARCHAR(20), description VARCHAR(5000), profile_pic bytea);
+=======
+<<<<<<< Updated upstream
+CREATE TABLE users (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+	username VARCHAR(60) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	email VARCHAR(255) UNIQUE,
+	linkedin VARCHAR(255),
+	major VARCHAR(255),
+	year VARCHAR(20),
+	description VARCHAR(5000),
+	profile_pic bytea
+);
+=======
+CREATE TABLE users (id BIGSERIAL NOT NULL PRIMARY KEY,
+    username VARCHAR(60) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    linkedin VARCHAR(255),
+    major VARCHAR(255),
+    year VARCHAR(20),
+    description VARCHAR(5000),
+    profile_pic bytea
+    );
+>>>>>>> Stashed changes
+>>>>>>> 3c0f21c (working on orgs)
+>>>>>>> 86fcde0 (working on orgs)
+>>>>>>> a1c2f0c (working on orgs)
+>>>>>>> 971ec25 (working on orgs)
 
 CREATE TABLE projects (id BIGSERIAL NOT NULL PRIMARY KEY, projectname VARCHAR(60) NOT NULL UNIQUE, description VARCHAR(5000), project_pic bytea);
 
