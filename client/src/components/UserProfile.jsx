@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import api from "../api/api";
 
 const UserProfile = () => {
@@ -46,6 +47,13 @@ const UserProfile = () => {
             <p style={{fontSize: "18px"}}>Major: {userData.major}</p>
             <p style={{fontSize: "18px"}}>Year: {userData.year}</p>
             <p style={{fontSize: "18px"}}>Description: {userData.description}</p>
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <Link to="/edit-profile">
+                    <button style={{padding: '15px 30px', fontSize: '28px', cursor: 'pointer', backgroundColor: 'white', border: 'black 1px solid', borderRadius: '5px'}}>
+                        Edit My Profile
+                    </button>
+                </Link>
+            </div>   
         </div>
     );
 };

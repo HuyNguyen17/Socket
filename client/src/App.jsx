@@ -10,6 +10,7 @@ import UserProfilePage from "./routes/UserProfilePage";
 import SignupResultPage from "./routes/SignupResult";
 import ProjectResultPage from "./routes/ProjectResult";
 import ProjectCreationPage from "./routes/ProjectCreationPage";
+import EditProfilePage from "./routes/EditProfilePage";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/users/:username" element={<UserProfilePage/>}/>
         <Route path="/create-project" element={<ProjectCreationPage/>}/>
         <Route path="/project-create-result" element={<ProjectResultPage/>}/>
+        <Route path="/edit-profile" element={<EditProfilePage/>}/>
       </Routes>
     </Router>
   );

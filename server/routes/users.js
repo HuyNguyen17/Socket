@@ -89,56 +89,52 @@ router.get('/decode', authorization, async (req, res) => {
 
 // edit account info (incomplete)
 router.put('/edit', authorization, async (req, res) => {
-    const{linkedin, major, year, description,profile_pic} = req.params;
+    const{linkedin, major, year, description} = req.body;
     try{
         const result = await db.query(
-            `SELECT * FROM users WHERE username = $1`,
-            [req.user]
+            `SELECT * FROM users WHERE username = $1`,[req.user]
         );
-        const user_id = result.id;
+        const user_id = result.rows[0].id
 
         //update the linkedin of the user
-        if(linkedin === result.linkedin){
+        if(linkedin === result.rows[0].linkedin){
             //do nothing if the linked in is the same as what is already in the db
         } else{
             await db.query(
                 'UPDATE users SET linkedin = $1 WHERE id = $2',[linkedin,user_id]
             );
         }
+        
         //update major
-        if(major === result.major){
+        if(major === result.rows[0].major){
             //do nothing if the major is the same as what is already in the db
         } else{
             await db.query(
                 'UPDATE users SET major = $1 WHERE id = $2',[major,user_id]
             );
         }
+        
          //update year
-         if(year === result.year){
+         if(year === result.rows[0].year){
             //do nothing if the year is the same as what is already in the db
         } else{
             await db.query(
                 'UPDATE users SET year = $1 WHERE id = $2',[year,user_id]
             );
         }
+        
          //update description
-         if(description === result.description){
+         if(description === result.rows[0].description){
             //do nothing if the description is the same as what is already in the db
         } else{
             await db.query(
                 'UPDATE users SET description = $1 WHERE id = $2',[description,user_id]
             );
         }
-          //update profile picture
-          if(profile_pic === result.profile_pic){
-            //do nothing if the profile_pic is the same as what is already in the db
-        } else{
-            await db.query(
-                'UPDATE users SET profile_pic = $1 WHERE id = $2',[profile_pic,user_id]
-            );
-        }
-
+        res.status(200).send(req.user);
+        //console.log("MADE IT BRO");
     } catch(error){
+        //console.log("YO ERROR MATE");
         res.status(500).send({ error: "Editing user profile failed."});
     }
 });
