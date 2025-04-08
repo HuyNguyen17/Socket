@@ -13,14 +13,8 @@ const ProjectsListPage = () => {
             Submit your project
           </button>
         </Link>
-        <div style={{ marginTop: '30px', fontSize: '36px'}}>
-          Projects:
-        </div>
       </div>
-      <div style={{ textAlign: 'center', marginTop: '50px' }}>
-        Here we will have a list of user projects fetched from the database.
-        <ProjectList/>
-      </div>
+      <ProjectList/>
     </div>
   );
 }
