@@ -1,6 +1,7 @@
 import React from 'react'
 import NavHeader from '../components/NavHeader'
 import { Link } from 'react-router-dom';
+import ProjectList from '../components/ProjectList';
 
 const ProjectsListPage = () => {
   return (
@@ -18,6 +19,7 @@ const ProjectsListPage = () => {
       </div>
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
         Here we will have a list of user projects fetched from the database.
+        <ProjectList/>
       </div>
     </div>
   );

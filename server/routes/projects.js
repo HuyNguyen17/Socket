@@ -123,6 +123,14 @@ router.post('/create_project', async (req, res) => {
             }
     });
 
+    router.get('/getall', authorization, async (req, res) => {
+        try {
+                const result = await db.query("SELECT * FROM projects");
+                return res.status(200).send(result.rows);
+            } catch (error) {
+                res.status(500).send( { error: 'Error fetching Projects' });
+            }
+    });
 
 
 router.post('/submit', async (req, res) => {
