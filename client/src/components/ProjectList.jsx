@@ -20,10 +20,10 @@ const ProjectList = () => {
   }, []);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', textAlign: 'left', flexDirection: 'column'}}>
+    <div style={{display: 'flex', justifyContent: 'center', textAlign: 'center', flexDirection: 'column'}}>
       <h2>Projects:</h2>
       {projects.length === 0 ? <p>No projects found.</p> : null}
-      <ol style={{listStylePosition: "inside", textAlign: 'left', margin: 'center'}}>
+      <ol style={{listStylePosition: "inside", textAlign: 'left', margin: 'auto'}}>
         {projects.map((project) => (
           <li key={project.id}><Link to={`/project/${project.projectname}`} style={{ textDecoration: "none", color: "blue" }}>{project.projectname}</Link></li>
         ))}
