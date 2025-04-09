@@ -42,7 +42,7 @@ const UserProfile = () => {
             <h1 style={{fontSize: "24px", fontWeight: "bold"}}>
                 {userData.username}'s Profile
             </h1>
-            <p style={{fontSize: "18px"}}>Email: {userData.email}</p>
+            <p style={{fontSize: "18px"}}>Email: <a href={"mailto:"+ userData.email}>{userData.email}</a></p>
             <p style={{fontSize: "18px"}}>LinkedIn: <a href={userData.linkedin} target="_blank" rel="noopener noreferrer"> {userData.linkedin}</a></p>
             <p style={{fontSize: "18px"}}>Major: {userData.major}</p>
             <p style={{fontSize: "18px"}}>Year: {userData.year}</p>
