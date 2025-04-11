@@ -105,12 +105,13 @@ router.post('/create_project', async (req, res) => {
         }
 
     });
-    router.post('/get_project', async (req, res) => {
-        const{project_name} = req.body;
+    router.get('/get_project/:projectname', async (req, res) => {
+        const{projectname} = req.params;
+        // console.log('Requesting ' + projectname);
         try {
                 const result = await db.query(
                     `SELECT * FROM projects WHERE projectname = $1`,
-                    [project_name]
+                    [projectname]
                 );
         
                 if (result.rowCount === 0){

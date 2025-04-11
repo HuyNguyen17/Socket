@@ -11,6 +11,7 @@ import SignupResultPage from "./routes/SignupResult";
 import ProjectResultPage from "./routes/ProjectResult";
 import ProjectCreationPage from "./routes/ProjectCreationPage";
 import EditProfilePage from "./routes/EditProfilePage";
+import ProjectProfilePage from "./routes/ProjectProfilePage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/projects" element={<ProjectsListPage/>}/>
         <Route path="/signup-result" element={<SignupResultPage/>}/>
         <Route path="/users/:username" element={<UserProfilePage/>}/>
+        <Route path="/project/:projectname" element={<ProjectProfilePage/>}/>
         <Route path="/create-project" element={<ProjectCreationPage/>}/>
         <Route path="/project-create-result" element={<ProjectResultPage/>}/>
         <Route path="/edit-profile" element={<EditProfilePage/>}/>
