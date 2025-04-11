@@ -7,10 +7,7 @@ const EditProfilePage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <NavHeader/>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-        <h2 className="text-2xl font-semibold mb-4">Editing Account</h2>
-        <EditProfile/>
-      </div>
+      <EditProfile/>
     </div>
   );
 }

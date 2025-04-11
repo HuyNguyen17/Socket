@@ -1,55 +1,111 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
-import api from "../api/api"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/api";
 
-//Login page!
-//TODO: Does not check for success! Check for it!
 const UserLogin = () => {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    
-    const [loginFailed, setFailure] = useState(false);
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginFailed, setFailure] = useState(false);
 
-    const HandleLogin = async (e) => {
-        try {
-            e.preventDefault(); //don't refresh
-            const body = {
-                    username,
-                    password,
-            }
-            api.post("users/login", body)
-                .then(function (response) {
-                    console.log(response);
-                    localStorage.setItem("authToken",response.data.token);
-                    alert("Login Success!");
-                    navigate("/home");
-                })
-                .catch(function (err) {
-                    console.log("Login Error!");
-                    console.log(err);
-                    setFailure(true);
-                });
-        }
-        catch(err) {
-            console.error(err.message);
-            setFailure(true);
-        }
-
+  const HandleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { username, password };
+      const response = await api.post("users/login", body);
+      localStorage.setItem("authToken", response.data.token);
+      alert("Login Success!");
+      navigate("/home");
+    } catch (err) {
+      console.error("Login Error!", err);
+      setFailure(true);
     }
+  };
 
-    return (
-        <div>
-            {loginFailed ? <div style={{color: "red"}}>Login Failed!</div> : ""}
-            <form onSubmit={HandleLogin}>
-                <label for="username">Username</label><br/>
-                <input type="text" id="username" name="username" value={username} onChange={e => setUsername(e.target.value)}></input><br/>
-                <label for="password">Password</label><br/>
-                <input type="password" id="password" name="password" value={password} onChange={e => setPassword(e.target.value)}></input><br/>
-                <button type="submit" style={{marginTop: '10px', marginBottom: '30px'}}>Login</button>
-            </form>
-        </div>
-    );
-}
+  const containerStyle = {
+    maxWidth: "500px",
+    margin: "40px auto",
+    backgroundColor: "#ffffff",
+    padding: "30px",
+    borderRadius: "8px",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+  };
+
+  const headingStyle = {
+    fontSize: "28px",
+    fontWeight: "700",
+    marginBottom: "30px",
+    textAlign: "center",
+    color: "#333",
+  };
+
+  const labelStyle = {
+    fontSize: "16px",
+    fontWeight: "500",
+    display: "block",
+    marginBottom: "6px",
+    marginTop: "16px",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    fontSize: "16px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    boxSizing: "border-box",
+  };
+
+  const buttonStyle = {
+    marginTop: "30px",
+    padding: "12px 24px",
+    fontSize: "18px",
+    backgroundColor: "#ffffff",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    cursor: "pointer",
+    display: "block",
+    width: "100%",
+  };
+
+  const errorStyle = {
+    color: "red",
+    marginBottom: "20px",
+    textAlign: "center",
+  };
+
+  return (
+    <div style={containerStyle}>
+      <h1 style={headingStyle}>Login</h1>
+
+      {loginFailed && <div style={errorStyle}>Login Failed!</div>}
+
+      <form onSubmit={HandleLogin}>
+        <label htmlFor="username" style={labelStyle}>Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={inputStyle}
+        />
+
+        <label htmlFor="password" style={labelStyle}>Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={inputStyle}
+        />
+
+        <button type="submit" style={buttonStyle}>Login</button>
+        <button onClick={() => navigate('/signup')} style={buttonStyle}> Create an account</button>
+      </form>
+    </div>
+  );
+};
 
 export default UserLogin;

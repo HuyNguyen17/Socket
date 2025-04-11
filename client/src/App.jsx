@@ -12,8 +12,13 @@ import ProjectResultPage from "./routes/ProjectResult";
 import ProjectCreationPage from "./routes/ProjectCreationPage";
 import EditProfilePage from "./routes/EditProfilePage";
 import ProjectProfilePage from "./routes/ProjectProfilePage";
+import { useEffect } from 'react';
 
 const App = () => {
+  useEffect(() => {
+    document.body.style.backgroundColor = "#f8f9fa";
+  }, []);
+
   return (
     <Router>
       <Routes>

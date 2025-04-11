@@ -9,7 +9,7 @@ const ProjectsListPage = () => {
       <NavHeader />
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
         <Link to="/create-project">
-          <button style={{padding: '15px 30px', fontSize: '28px', cursor: 'pointer', backgroundColor: 'white', border: 'black 1px solid', borderRadius: '5px'}}>
+          <button style={{padding: '15px 30px', fontSize: '28px', cursor: 'pointer', backgroundColor: 'white', border: "1px solid #ddd", borderRadius: "8px",}}>
             Submit your project
           </button>
         </Link>
