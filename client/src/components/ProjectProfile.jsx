@@ -44,13 +44,13 @@ const ProjectProfile = () => {
                 {projectData.projectname}
             </h1>
             <p style={{fontSize: "18px"}}>Description: {projectData.description}</p>
-            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            {/*<div style={{ textAlign: 'center', marginTop: '50px' }}>
                 <Link to="/edit-profile">
                     <button style={{padding: '15px 30px', fontSize: '28px', cursor: 'pointer', backgroundColor: 'white', border: 'black 1px solid', borderRadius: '5px'}}>
                         Edit My Profile
                     </button>
                 </Link>
-            </div>   
+            </div>   */}
         </div>
     );
 };
