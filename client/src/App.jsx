@@ -10,10 +10,8 @@ import UserProfilePage from "./routes/UserProfilePage";
 import SignupResultPage from "./routes/SignupResult";
 import ProjectResultPage from "./routes/ProjectResult";
 import ProjectCreationPage from "./routes/ProjectCreationPage";
-<<<<<<< HEAD
+
 import EditProfilePage from "./routes/EditProfilePage";
-=======
->>>>>>> 8642c5f (Added an option to create a project and save it to backend.)
 
 const App = () => {
   return (
@@ -30,10 +28,8 @@ const App = () => {
         <Route path="/users/:username" element={<UserProfilePage/>}/>
         <Route path="/create-project" element={<ProjectCreationPage/>}/>
         <Route path="/project-create-result" element={<ProjectResultPage/>}/>
-<<<<<<< HEAD
         <Route path="/edit-profile" element={<EditProfilePage/>}/>
-=======
->>>>>>> 8642c5f (Added an option to create a project and save it to backend.)
+
       </Routes>
     </Router>
   );

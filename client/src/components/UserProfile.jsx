@@ -47,7 +47,6 @@ const UserProfile = () => {
             <p style={{fontSize: "18px"}}>Major: {userData.major}</p>
             <p style={{fontSize: "18px"}}>Year: {userData.year}</p>
             <p style={{fontSize: "18px"}}>Description: {userData.description}</p>
-<<<<<<< HEAD
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
                 <Link to="/edit-profile">
                     <button style={{padding: '15px 30px', fontSize: '28px', cursor: 'pointer', backgroundColor: 'white', border: 'black 1px solid', borderRadius: '5px'}}>
@@ -55,8 +54,7 @@ const UserProfile = () => {
                     </button>
                 </Link>
             </div>   
-=======
->>>>>>> 849414f (Front-end only changes to make the websites look nicer.)
+
         </div>
     );
 };
