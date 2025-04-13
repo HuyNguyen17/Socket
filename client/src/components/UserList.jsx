@@ -20,12 +20,12 @@ const UserList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="contentContainer">
       <h2>User List</h2>
       {users.length === 0 ? <p>No users found.</p> : null}
       <ul>
         {users.map((user) => (
-          <li key={user.username}><Link to={`/profile/${user.username}`} style={{ textDecoration: "none", color: "blue" }}>{user.username}</Link></li>
+          <li key={user.username}><Link to={`/profile/${user.username}`}>{user.username}</Link></li>
         ))}
       </ul>
     </div>
