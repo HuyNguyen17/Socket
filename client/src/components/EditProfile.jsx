@@ -59,7 +59,7 @@ const EditProfile = () => {
       <fieldset>
         <legend>Edit your user profile</legend>
         {editFailed && (
-          <div classname={"failureMessage"}>
+          <div classname={""}>
             Edit Failed!
           </div>
         )}
