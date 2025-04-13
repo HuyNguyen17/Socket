@@ -1,3 +1,7 @@
+body {
+    background-color: #f8f9fa;
+}
+
 form {
     max-width: 750px;
     margin: 40px auto;
