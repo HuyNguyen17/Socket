@@ -1,55 +1,57 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
-import api from "../api/api"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/api";
 
-//Login page!
-//TODO: Does not check for success! Check for it!
 const UserLogin = () => {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    
-    const [loginFailed, setFailure] = useState(false);
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginFailed, setFailure] = useState(false);
 
-    const HandleLogin = async (e) => {
-        try {
-            e.preventDefault(); //don't refresh
-            const body = {
-                    username,
-                    password,
-            }
-            api.post("users/login", body)
-                .then(function (response) {
-                    console.log(response);
-                    localStorage.setItem("authToken",response.data.token);
-                    alert("Login Success!");
-                    navigate("/home");
-                })
-                .catch(function (err) {
-                    console.log("Login Error!");
-                    console.log(err);
-                    setFailure(true);
-                });
-        }
-        catch(err) {
-            console.error(err.message);
-            setFailure(true);
-        }
-
+  const HandleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { username, password };
+      const response = await api.post("users/login", body);
+      localStorage.setItem("authToken", response.data.token);
+      alert("Login Success!");
+      navigate("/home");
+    } catch (err) {
+      console.error("Login Error!", err);
+      setFailure(true);
     }
+  };
 
-    return (
-        <div>
-            {loginFailed ? <div style={{color: "red"}}>Login Failed!</div> : ""}
-            <form onSubmit={HandleLogin}>
-                <label for="username">Username</label><br/>
-                <input type="text" id="username" name="username" value={username} onChange={e => setUsername(e.target.value)}></input><br/>
-                <label for="password">Password</label><br/>
-                <input type="password" id="password" name="password" value={password} onChange={e => setPassword(e.target.value)}></input><br/>
-                <button type="submit" style={{marginTop: '10px', marginBottom: '30px'}}>Login</button>
-            </form>
-        </div>
-    );
-}
+  return (
+    <form onSubmit={HandleLogin}>
+      <fieldset>
+        <legend>Login</legend>
+        {loginFailed && <div className="failureMessage">
+          Login Failed!
+          </div>}
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Login</button>
+        <button onClick={() => navigate('/signup')} className="linkButton"> Create an account</button>
+      </fieldset>
+    </form>
+  );
+};
 
 export default UserLogin;

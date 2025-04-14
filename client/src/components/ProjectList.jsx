@@ -8,9 +8,7 @@ const ProjectList = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        console.log("Fetching projects..."); // Debug log
-        const response = await api.get("/projects/getall"); 
-        console.log("projects fetched:", response.data); // Debug log
+        const response = await api.get("/projects/getall");
         setProjects(response.data);
       } catch (error) {
         console.error("Failed to fetch projects:", error);
@@ -20,14 +18,26 @@ const ProjectList = () => {
   }, []);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', textAlign: 'center', flexDirection: 'column'}}>
-      <h2>Projects:</h2>
-      {projects.length === 0 ? <p>No projects found.</p> : null}
-      <ol style={{listStylePosition: "inside", textAlign: 'left', margin: 'auto'}}>
-        {projects.map((project) => (
-          <li key={project.id}><Link to={`/project/${project.projectname}`} style={{ textDecoration: "none", color: "blue" }}>{project.projectname}</Link></li>
-        ))}
-      </ol>
+    <div className="contentContainer">
+      <h2>User projects</h2>
+      {projects.length === 0 ? (
+        <p>No projects found.</p>
+      ) : (
+        projects.map((project) => {
+          const desc = project.description ?? "";
+          return (
+            <div key={project.id} className="itemContainer">
+              <Link to={`/project/${project.projectname}`}>
+                {project.projectname}
+              </Link>
+              <p>
+                {desc.slice(0, 100)}
+                {desc.length > 100 ? "..." : ""}
+              </p>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };
