@@ -46,8 +46,20 @@ CREATE TABLE link_organizations (
     PRIMARY KEY (user_id, org_id)
 );
 
+
+CREATE TABLE posts(
+    user_id bigint REFERENCES users(id) on DELETE CASCADE,x
+    org_id bigint REFERENCES organizations(id) on DELETE CASCADE,
+    proj_id bigint REFERENCES projects(id) on DELETE CASCADE,
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    post_body VARCHAR(5000),
+);
+
 INSERT INTO users (username, password, email, linkedin, major, year, description) values ('firstuser', 'firstpassword', 'firstuser@ufl.edu', 'mylinkedin.com', 'Computer Engineering', '4th', 'Freshman ece student at UF!');
  
+
+
+
 -- to connect to the database run \c socket
 -- to reset/delete a table run DROP TABLE table_name;
 
