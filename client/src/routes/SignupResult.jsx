@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 const SignupResultPage = () => {
   const {state} = useLocation();
   const SUCCESS_MESSAGE = "Signup successful. You can now login to your account!";
-  const FAILURE_MESSAGE = "Signup failed. User/email taken or blank field entered. ";
+  const FAILURE_MESSAGE = "Signup failed. User/email taken or blank field entered or non-ufl email used";
   return (
     <div>
       <NavHeader/>
