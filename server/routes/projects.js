@@ -22,7 +22,7 @@ router.post('/create_project', async (req, res) => {
             res.status(201).send({ message: 'Project created'});
         }
         catch(error){
-            res.status(500).send({ error: "Project Name Taken or null or too long"});
+            return res.status(500).send({ error: "Project Name Taken or null or too long"});
         }
         //get the ID of the project and link it to the user.
 
@@ -66,7 +66,7 @@ router.post('/create_project', async (req, res) => {
             }
             return res.status(200).send("Project Created");
         }catch(error){
-            res.status(500).send({ error: "Project or Username doesnt exist."});
+            return res.status(500).send({ error: "Project or Username doesnt exist."});
         }
     });
 
