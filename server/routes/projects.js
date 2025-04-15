@@ -19,13 +19,13 @@ router.post('/create_project', async (req, res) => {
             await db.query(
                 'INSERT INTO projects (projectname) VALUES($1)' , [project_name] 
             );
-            res.status(201).send({ message: 'Project created'});
         }
         catch(error){
             return res.status(500).send({ error: "Project Name Taken or null or too long"});
         }
         //get the ID of the project and link it to the user.
 
+        console.log("Logging id");
         try{
             const username = "";
             app.runMiddleware('/decode',{method:'post'},function(res,body,req){
@@ -38,6 +38,7 @@ router.post('/create_project', async (req, res) => {
                     );
             // if username does not exist, throw error
             if (results.rowCount === 0) {
+                console.log(username + " does not exist");
                 return res.status(401).send( { error: 'Nonexistant User'});
             }
             const user = results.rows[0];
