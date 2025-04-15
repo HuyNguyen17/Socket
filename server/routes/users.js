@@ -14,22 +14,23 @@ router.post('/signup', async (req, res) => {
     if (!username || !password || !email) {
         return res.status(400).send({ error: "All fields required."});
     }
-        
+    if (email.indexOf("@ufl.edu") === -1){
+        console.log(email.indexOf("@ufl.edu"));
+        return res.status(505).send({ error: 'Only UFL emails allowed'});
+     }
+
     //console.log(req.body); //uncomment to see what is being passed in
     try{
-        if (email.indexOf("@ufl.edu") == -1){
-            console.log(email.indexOf("@ufl.edu"));
-            res.status(505).send({ error: 'Only UFL emails allowed'});
-            
-        }
+        //console.log(email.indexOf("@ufl.edu"));
         const hashPassword = await bcrypt.hash(password, saltRounds);
         //console.log(hashPassword); //uncomment to see hashed password 
-        if(email.indexOf("@ufl.edu)") != -1){
-        await db.query(
-            'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashPassword, email]
-        );
-        }
-        res.status(201).send({ message: 'Signup Succesful'});
+            console.log("This second if statement works");
+            await db.query(
+                'INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashPassword, email]
+            );
+            res.status(201).send({ message: 'Signup Succesful'});
+        
+        
     } catch (error) {
         if (email.indexOf("@ufl.edu") == -1){
             res.status(505).send({ error: 'Only UFL emails allowed'});
