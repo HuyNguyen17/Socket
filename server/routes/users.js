@@ -32,9 +32,6 @@ router.post('/signup', async (req, res) => {
         
         
     } catch (error) {
-        if (email.indexOf("@ufl.edu") == -1){
-            res.status(505).send({ error: 'Only UFL emails allowed'});
-        }
         res.status(500).send({ error: "Signup Failed: Username/email taken or empty field"});
     }
 });
