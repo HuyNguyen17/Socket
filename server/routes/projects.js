@@ -6,11 +6,8 @@ const jwt = require('jsonwebtoken');
 const authorization = require("../authorization");
 const user = require("./users.js");
 
-
-
-
 router.post('/create_project', async (req, res) => {
-    const{project_name ,project_description, auth_token} = req.body;
+    const{project_name, project_description} = req.body;
         if(!project_name){
             return res.status(400).send({ error: "Project needs to have a name."});
 
@@ -19,18 +16,17 @@ router.post('/create_project', async (req, res) => {
             await db.query(
                 'INSERT INTO projects (projectname) VALUES($1)' , [project_name] 
             );
-            res.status(201).send({ message: 'Project created'});
         }
         catch(error){
-            res.status(500).send({ error: "Project Name Taken or null or too long"});
+            return res.status(500).send({ error: "Project Name Taken or null or too long"});
         }
         //get the ID of the project and link it to the user.
 
+        console.log("Logging id");
         try{
-            const username = "";
-            app.runMiddleware('/decode',{method:'post'},function(res,body,req){
-                username = res;
-            });
+            const username = jwt.decode(req.headers.authorization).username;
+
+            console.log("Username: %s", username);
             
             const results = await db.query(
                         'SELECT * FROM users WHERE username = $1',
@@ -38,6 +34,7 @@ router.post('/create_project', async (req, res) => {
                     );
             // if username does not exist, throw error
             if (results.rowCount === 0) {
+                console.log(username + " does not exist");
                 return res.status(401).send( { error: 'Nonexistant User'});
             }
             const user = results.rows[0];
@@ -52,21 +49,25 @@ router.post('/create_project', async (req, res) => {
                 return res.status(401).send( { error: 'Nonexistant project'});
              }
             const project = projres.rows[0];
+          
 
             await db.query(
-                'INSERT INTO link_projects (user_id,project_id) VALUES($1,$2)' , [user.id ,project.id] 
+                'INSERT INTO link_projects (user_id,proj_id) VALUES($1,$2)' , [user.id ,project.id] 
             );
 
-            if(description.length > 5000){
+            if(project_description.length > 5000){
                 return res.status(500).send( { error: 'Description too Long'});
             }else{
+                console.log("Adding description", project_description);
                 await db.query(
                     'UPDATE projects SET description = $1 WHERE id = $2', [project_description, project.id]
                 );
             }
+            console.log("Project %s Created", project_name);
             return res.status(200).send("Project Created");
         }catch(error){
-            res.status(500).send({ error: "Project or Username doesnt exist."});
+            console.log(error);
+            return res.status(500).send({ error: "Project or Username doesnt exist."});
         }
     });
 
@@ -132,21 +133,5 @@ router.post('/create_project', async (req, res) => {
                 res.status(500).send( { error: 'Error fetching Projects' });
             }
     });
-
-
-router.post('/submit', async (req, res) => {
-    const {project_name, project_description} = req.body;
-    if (!project_name || !project_description) {
-        return res.status(400).send({ error: "All fields required."});
-    }
-    //console.log(req.body); //uncomment to see what is being passed in
-    try{
-        //console.log(hashPassword); //uncomment to see hashed password 
-        await db.query('INSERT INTO projects (projectname, description) VALUES ($1, $2)', [project_name, project_description]);
-        res.status(201).send({ message: 'Submission succesful'});
-    } catch (error) {
-        res.status(500).send({ error: "Submission failed, empty field."});
-    }
-});
 
 module.exports = router;

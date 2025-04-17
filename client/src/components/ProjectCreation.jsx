@@ -10,7 +10,7 @@ const ProjectCreation = () => {
         e.preventDefault();
         const body = { project_name, project_description };
         try {
-            await api.post("projects/submit", body);
+            await api.post("projects/create_project", body);
             navigate("/project-create-result", { state: { success: true } });
         } catch (err) {
             console.error(err.message);
