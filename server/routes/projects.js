@@ -85,7 +85,7 @@ router.post('/create_project', async (req, res) => {
             }
             
             //update profile picture
-            if(profile_pic === result.profile_pic){
+            if(profile_pic === result.rows[0].profile_pic){
                     //do nothing if the profile_pic is the same as what is already in the db
             } else{
                 await db.query(
@@ -93,7 +93,7 @@ router.post('/create_project', async (req, res) => {
                 );
             }
             //update description
-            if(description === result.description){
+            if(description === result.rows[0].description){
                 //do nothing if the description is the same as what is already in the db
             } else{
                 await db.query(
@@ -118,7 +118,28 @@ router.post('/create_project', async (req, res) => {
                 if (result.rowCount === 0){
                     return res.status(404).send( { error: 'Nonexistant Project' });
                 }
-                const project = result.rows[0];
+                let project = result.rows[0];
+
+                
+                const result2 = await db.query(
+                    `SELECT * FROM link_projects WHERE proj_id = $1`,
+                    [result.rows[0].id]
+                );
+                
+            
+                const result3 = await db.query(
+                    'SELECT * FROM users WHERE id = $1', [result2.rows[0].user_id]
+                );
+                
+                //console.log(result3.rows[0].username);
+
+                
+                project.username = result3.rows[0].username;
+                
+
+
+
+
                 return res.status(200).send(project);
             } catch (error) {
                 res.status(500).send( { error: 'Error fetching Project' });

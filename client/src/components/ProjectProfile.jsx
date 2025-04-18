@@ -18,6 +18,7 @@ const ProjectProfile = () => {
         }
         const response = await api.get(`/projects/get_project/${projectname}`);
         setProjectData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching project profile:", error);
         setError(true);
@@ -46,6 +47,7 @@ const ProjectProfile = () => {
   return (
     <div className="contentBox">
       <h2>{projectData.projectname}</h2>
+      <h3>{"Project Creator: "} <Link to={"/users/" + projectData.username}>{projectData.username}</Link> </h3>
       <p>{projectData.description || "No description provided."}</p>
       <Link to="/projects">Go back to project list</Link>
     </div>
