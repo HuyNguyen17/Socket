@@ -6,6 +6,7 @@ const UserProfile = () => {
   const { username } = useParams();
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(false);
+  const [localuser, setLocaluser] = useState(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -15,8 +16,15 @@ const UserProfile = () => {
           setError(true);
           return;
         }
+        
+        const localUser = await api.get(`/users/decode`, {
+          headers: {
+              Authorization: `${token}`, // Send the token in the header
+          },});
         const response = await api.get(`/users/getuser/${username}`);
+        setLocaluser(localUser.data);
         setUserData(response.data);
+        
       } catch (error) {
         console.error("Error fetching user profile:", error);
         setError(true);
@@ -72,12 +80,12 @@ const UserProfile = () => {
       <p>
         <strong>Description:</strong> {userData.description || "No description provided."}
       </p>
-
-      <div id="editButton">
+      {(userData.username === localuser) &&  <div id="editButton">
         <Link to="/edit-profile">
         Edit My Profile
         </Link>
       </div>
+      }
     </div>
   );
 };
